@@ -85,7 +85,7 @@ $("#upForm").on("submit", function(event){
 	event.preventDefault();
 
 	let emptyID;
-	let newDate;
+	let newDate = "";
 	if ($("#dayU").val() && $("#monthU").val() && $("#yearU").val()) {
 		newDate = $("#dayU").val() + "/" + $("#monthU").val() + "/" + $("#yearU").val();
 	}
