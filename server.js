@@ -69,7 +69,7 @@ app.post("/blog-posts", jsonParser, (req, res) =>{
 		publishDate: req.body.publishDate
 	}
 
-	if (!newPost.title || !newPost.content || !newPost.author || !newPost.publishDate) {
+	if (newPost.title == "" || newPost.content  == "" || newPost.author  == "" || newPost.publishDate  == "") {
 		res.statusMessage = "Missing parameter(s)";
 		return res.status(406).json({
 			status: 406,

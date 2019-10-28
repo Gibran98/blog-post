@@ -11,7 +11,7 @@ function listPosts() {
 					$("#blogPosts").empty();
 
 					for (let post of responseJSON) {
-						$("#blogPosts").append("<div class='post'><h3>" + post.title + "</h3><h6>By: " + post.author + ", " + post.publishDate + "</h6><p>" + post.content + "</p></div>");
+						$("#blogPosts").append("<div class='post'><h3>" + post.title + "</h3><h6>By: " + post.author + ", " + post.publishDate + "</h6><p>" + post.content + "</p><p>ID: " + post.id + "</p></div>");
 					}
 
 				},
@@ -25,9 +25,11 @@ function listPosts() {
 
 $("#postForm").on("submit", function(event){
 	event.preventDefault();
-	let newDate = $("#dayP").val() + "/" + $("#monthP").val() + "/" + $("#yearP").val();
-
-	createPost($("#titleP").val(), $("#authorP").val(), $("#contentP").val(), newDate);
+	
+	if ($("#dateP").val() == "")
+		createPost($("#titleP").val(), $("#authorP").val(), $("#contentP").val(), "");
+	else
+		createPost($("#titleP").val(), $("#authorP").val(), $("#contentP").val(), $("#dateP").val());
 });
 
 function createPost(title2, author2, content2, date) {
@@ -86,8 +88,8 @@ $("#upForm").on("submit", function(event){
 
 	let emptyID;
 	let newDate = "";
-	if ($("#dayU").val() && $("#monthU").val() && $("#yearU").val()) {
-		newDate = $("#dayU").val() + "/" + $("#monthU").val() + "/" + $("#yearU").val();
+	if ($("#dateU").val() != "") {
+		newDate = $("#dateU").val();
 	}
 
 	if ($("#idU").val() != "")
@@ -136,9 +138,9 @@ function updateObjectPost(newPost) {
 
 					for (let post of responseJSON) {
 						if (post.id == newPost.id)
-							$("#blogPosts").append("<div class='post'><h3>" + newPost.title + "</h3><h6>By: " + newPost.author + ", " + newPost.publishDate + "</h6><p>" + newPost.content + "</p></div>");
+							$("#blogPosts").append("<div class='post'><h3>" + newPost.title + "</h3><h6>By: " + newPost.author + ", " + newPost.publishDate + "</h6><p>" + newPost.content + "</p><p>ID: " + newPost.id + "</p></div>");
 						else
-							$("#blogPosts").append("<div class='post'><h3>" + post.title + "</h3><h6>By: " + post.author + ", " + post.publishDate + "</h6><p>" + post.content + "</p></div>");
+							$("#blogPosts").append("<div class='post'><h3>" + post.title + "</h3><h6>By: " + post.author + ", " + post.publishDate + "</h6><p>" + post.content + "</p><p>ID: " + post.id + "</p></div>");
 					}
 
 				},
